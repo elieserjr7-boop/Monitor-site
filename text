@@ -1,0 +1,31 @@
+name: Keep-Alive Bot
+
+on:
+  workflow_dispatch: # Mantém o botão manual
+  
+  schedule:
+    # O truque: Rodar nos minutos 4, 14, 24, 34, 44 e 54
+    # Isso evita o "congestionamento" dos minutos redondos
+    - cron: '4,14,24,34,44,54 * * * *'
+
+jobs:
+  ping-my-sites:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Agendamento Online
+        run: curl -sS https://agendamentos-barbearia-lucas-borges.onrender.com > /dev/null
+
+      - name: Ping Controle Diario
+        run: curl -sS https://controle-diario-barbearia-lucas-borges.onrender.com/ > /dev/null
+
+      - name: Ping Agendamento Interno
+        run: curl -sS https://agendamento-interno-barbearia-lucas.onrender.com > /dev/null
+
+      - name: Ping Dashboard Interno
+        run: curl -sS https://dashboard-barbearia-lb.onrender.com > /dev/null
+      
+      - name: Ping Registro Diario
+        run: curl -sS https://registro-barbearia-lucas-borges.onrender.com > /dev/null
+      
+      - name: Ping Registro Esmalteria
+        run: curl -sS https://registroesmalteriaborges.streamlit.app > /dev/null
